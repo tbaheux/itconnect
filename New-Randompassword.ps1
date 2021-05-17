@@ -54,7 +54,6 @@ function New-RandomPassword {
     )
 
     Begin {
-        #Write-LogInfo -LogFile $sLogFile -Msg "Generating new ramdom password ..."
         $Sum = $Uppercase + $Digits + $SpecialCharacters
         if ($Length -lt $Sum) {
           Write-Error "Cannot continue: You should increase password length with current parameters."
@@ -95,15 +94,13 @@ function New-RandomPassword {
           }
         }
         Catch {
-            #Write-LogError -LogFile $sLogFile -Msg $_.Exception  -ToScreen $true
+            Write-Error $_.Exception
             Break
         }
     }
     End {
         If ($?) {
             Return $NewRandomPassword
-            #Write-LogSuccess -LogFile $sLogFile -Message "Random password generated successfully." -ToScreen $true
-            #Write-LogInfo -LogFile $sLogFile -Message "" -ToScreen $true
         }
     }
 }
