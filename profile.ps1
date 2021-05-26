@@ -1,4 +1,7 @@
 # You should put this file in the $profile.CurrentUserAllHosts path.
+    # Linux                         : /home/<user>/.config/powershell/profile.ps1
+    # Windows PowerShell 5.1        : C:\Users\<user>\Documents\WindowsPowerShell\profile.ps1
+    # Windows PowerShell Core (7+)  : C:\Users\<user>\Documents\PowerShell\profile.ps1
 
     function Prompt {
         
