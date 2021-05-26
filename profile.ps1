@@ -12,7 +12,9 @@
         # ($CurrentPath.ToString() -Split {$_ -eq "/" -or $_ -eq "\"})[-1]
     $GitFolder = Join-Path -Path $CurrentPath -ChildPath ".git"
     $LastCommand = Get-History -Count 1
-    if ($lastCommand) { $RunTime = ($lastCommand.EndExecutionTime - $lastCommand.StartExecutionTime).TotalSeconds }
+    if ($lastCommand) {
+        $RunTime = ($lastCommand.EndExecutionTime - $lastCommand.StartExecutionTime).TotalSeconds
+    }
     if ($RunTime -ge 60) {
         $ts = [timespan]::fromseconds($RunTime)
         $min, $sec = ($ts.ToString("mm\:ss")).Split(":")
@@ -52,14 +54,12 @@
     if ($IsWindows) {
         $IsAdmin = (New-Object Security.Principal.WindowsPrincipal `
         ([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
-    }
 
-        if ($IsWindows) {
-            Write-Host ($(if ($IsAdmin) { 'Elevated ' } else { '' })) `
+        Write-Host ($(if ($IsAdmin) { 'Elevated ' } else { '' })) `
             -NoNewLine `
             -ForegroundColor White `
             -BackgroundColor DarkRed
-        }
+    }
         if ($IsLinux -or $IsMacOS) {
             Write-Host "Sudo " `
             -NoNewLine `
