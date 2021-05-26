@@ -7,9 +7,8 @@
         
     $CurrentUser = (Get-ChildItem Env:\USERNAME).Value
     $Hostname = hostname
-    $CurrentPath = (Get-Location)
-    $CurrentDirName = "./" + ($CurrentPath.ToString() -Split {$_ -eq "/" -or $_ -eq "\"})[-1]
-        # (Split-Path -Path $CurrentPath -Leaf)
+    $CurrentPath = (Get-Location).Path
+    $CurrentDirName = "./" + (Split-Path -Path $CurrentPath -Leaf)
         # ($CurrentPath.ToString() -Split {$_ -eq "/" -or $_ -eq "\"})[-1]
     $GitFolder = Join-Path -Path $CurrentPath -ChildPath ".git"
     $LastCommand = Get-History -Count 1
