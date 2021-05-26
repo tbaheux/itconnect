@@ -11,6 +11,10 @@
     $CurrentDirName = "./" + (Split-Path -Path $CurrentPath -Leaf)
         # ($CurrentPath.ToString() -Split {$_ -eq "/" -or $_ -eq "\"})[-1]
     $GitFolder = Join-Path -Path $CurrentPath -ChildPath ".git"
+    if ($PSVersionTable.PSVersion.Major -lt 7) {
+        $PSVersion = "Desktop"
+    }
+    else {$PSVersion = "Core"}
     $LastCommand = Get-History -Count 1
     if ($lastCommand) {
         $RunTime = ($lastCommand.EndExecutionTime - $lastCommand.StartExecutionTime).TotalSeconds
@@ -51,7 +55,7 @@
     }
     else {$GitPrompt = ""}
 
-    if ($IsWindows -or $env:OS) {
+    if ($IsWindows -or ($PSVersion = "Desktop")) {
         $IsAdmin = (New-Object Security.Principal.WindowsPrincipal `
         ([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 
