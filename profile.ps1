@@ -11,10 +11,6 @@
     $CurrentDirName = "./" + (Split-Path -Path $CurrentPath -Leaf)
         # ($CurrentPath.ToString() -Split {$_ -eq "/" -or $_ -eq "\"})[-1]
     $GitFolder = Join-Path -Path $CurrentPath -ChildPath ".git"
-    if ($PSVersionTable.PSVersion.Major -lt 7) {
-        $PSVersion = "Desktop"
-    }
-    else {$PSVersion = "Core"}
     $LastCommand = Get-History -Count 1
     if ($lastCommand) {
         $RunTime = ($lastCommand.EndExecutionTime - $lastCommand.StartExecutionTime).TotalSeconds
@@ -64,17 +60,17 @@
             -ForegroundColor White `
             -BackgroundColor DarkRed
     }
-    if ($PSVersion -eq "Desktop") {
-        Write-Host "Desktop" `
-            -NoNewLine `
-            -ForegroundColor White `
-            -BackgroundColor DarkRed
-    }
-    if ($IsLinux -or $IsMacOS) {
+    else if ($IsLinux -or $IsMacOS) {
         Write-Host "Sudo " `
         -NoNewLine `
         -ForegroundColor White `
         -BackgroundColor DarkRed
+    }
+    else {
+        Write-Host "Desktop" `
+            -NoNewLine `
+            -ForegroundColor White `
+            -BackgroundColor DarkRed
     }
     Write-Host " $CurrentUser@$Hostname " `
         -NoNewLine `
