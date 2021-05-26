@@ -42,11 +42,11 @@
             }
             Catch {
                 # Default prompt
-                $GitPompt = ""
+                $GitPrompt = ""
             }
         } else {
             # Default prompt
-            $GitPompt = ""
+            $GitPrompt = ""
         }
     }
     else {$GitPrompt = ""}
