@@ -54,13 +54,12 @@
     if ($IsWindows) {
         $IsAdmin = (New-Object Security.Principal.WindowsPrincipal `
         ([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
-
         Write-Host ($(if ($IsAdmin) { 'Elevated ' } else { '' })) `
             -NoNewLine `
             -ForegroundColor White `
             -BackgroundColor DarkRed
     }
-    else if ($IsLinux -or $IsMacOS) {
+    elseif ($IsLinux -or $IsMacOS) {
         Write-Host "Sudo " `
         -NoNewLine `
         -ForegroundColor White `
