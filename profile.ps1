@@ -55,7 +55,7 @@
     }
     else {$GitPrompt = ""}
 
-    if ($IsWindows -or ($PSVersion = "Desktop")) {
+    if ($IsWindows) {
         $IsAdmin = (New-Object Security.Principal.WindowsPrincipal `
         ([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 
@@ -64,37 +64,43 @@
             -ForegroundColor White `
             -BackgroundColor DarkRed
     }
-        if ($IsLinux -or $IsMacOS) {
-            Write-Host "Sudo " `
+    if ($PSVersion -eq "Desktop") {
+        Write-Host "Desktop" `
             -NoNewLine `
             -ForegroundColor White `
             -BackgroundColor DarkRed
-        }
-        Write-Host " $CurrentUser@$Hostname " `
-            -NoNewLine `
-            -ForegroundColor White `
-            -BackgroundColor DarkBlue
-        Write-Host $CurrentDirName `
-            -NoNewLine `
-            -ForegroundColor White `
-            -BackgroundColor Black
-        Write-Host " $GitPrompt " `
-            -NoNewLine `
-            -ForegroundColor Yellow `
-            -BackgroundColor Black
-            Write-Host "[$ElapsedTime] " `
-            -NoNewLine `
-            -ForegroundColor Green `
-            -BackgroundColor Black
-        Write-Host (Get-History).Count `
-            -NoNewLine `
-            -ForegroundColor White `
-            -BackgroundColor Black
-        Write-Host " >" `
-            -NoNewLine `
-            -ForegroundColor White `
-            -BackgroundColor Black
+    }
+    if ($IsLinux -or $IsMacOS) {
+        Write-Host "Sudo " `
+        -NoNewLine `
+        -ForegroundColor White `
+        -BackgroundColor DarkRed
+    }
+    Write-Host " $CurrentUser@$Hostname " `
+        -NoNewLine `
+        -ForegroundColor White `
+        -BackgroundColor DarkBlue
+    Write-Host $CurrentDirName `
+        -NoNewLine `
+        -ForegroundColor White `
+        -BackgroundColor Black
+    Write-Host " $GitPrompt " `
+        -NoNewLine `
+        -ForegroundColor Yellow `
+        -BackgroundColor Black
+        Write-Host "[$ElapsedTime] " `
+        -NoNewLine `
+        -ForegroundColor Green `
+        -BackgroundColor Black
+    Write-Host (Get-History).Count `
+        -NoNewLine `
+        -ForegroundColor White `
+        -BackgroundColor Black
+    Write-Host " >" `
+        -NoNewLine `
+        -ForegroundColor White `
+        -BackgroundColor Black
 
-        $host.UI.RawUI.WindowTitle = "Current Dir: $((Get-Location).Path)"
-        Return " "
+    $host.UI.RawUI.WindowTitle = "Current Dir: $((Get-Location).Path)"
+    Return " "
     }
