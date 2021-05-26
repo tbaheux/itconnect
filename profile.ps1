@@ -41,8 +41,6 @@
         # Default prompt
         $GitPrompt = ""
     }
-    }
-    else {$GitPrompt = ""}
 
     if ($IsWindows) {
         $IsAdmin = (New-Object Security.Principal.WindowsPrincipal `
