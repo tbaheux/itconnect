@@ -29,15 +29,15 @@
         $CurrentBranchExt = $((git branch) -match "\*");
         if ($CurrentBranchExt) {
             Try {			
+                $Branch = git branch
                 # Holds the pattern for extracting the branch name
                 $CurrentBranchMatchPattern = "\w*";
                 # Executes the regular expression against the matched branch
-                $CurrentBranchNameMatches = [regex]::matches($CurrentBranchExt, $CurrentBranchMatchPattern);
+                $CurrentBranchNameMatches = [regex]::matches($Branch, $CurrentBranchMatchPattern);
                 # Gets the current branch from the matches
                 $CurrentBranchName = $CurrentBranchNameMatches.Captures[2].Value.Trim();
 
                 # Sets the Prompt which contains the Current git branch name
-                # Prompt format - current_directory [ current_branch ] >
                 $GitPrompt = "($CurrentBranchName)" 			
             }
             Catch {
