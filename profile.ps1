@@ -25,29 +25,22 @@
         $ElapsedTime = -join (($ElapsedTime.ToString()), " sec")
     }
 
-    if (Test-Path $GitFolder) {
-        $CurrentBranchExt = $((git branch) -match "\*");
-        if ($CurrentBranchExt) {
-            Try {			
-                $Branch = git branch
-                # Holds the pattern for extracting the branch name
-                $CurrentBranchMatchPattern = "\w*";
-                # Executes the regular expression against the matched branch
-                $CurrentBranchNameMatches = [regex]::matches($Branch, $CurrentBranchMatchPattern);
-                # Gets the current branch from the matches
-                $CurrentBranchName = $CurrentBranchNameMatches.Captures[2].Value.Trim();
+    if (Test-Path $GitFolder) {		
+        $Branch = git branch
+        # Holds the pattern for extracting the branch name
+        $CurrentBranchMatchPattern = "\w*";
+        # Executes the regular expression against the matched branch
+        $CurrentBranchNameMatches = [regex]::matches($Branch, $CurrentBranchMatchPattern);
+        # Gets the current branch from the matches
+        $CurrentBranchName = $CurrentBranchNameMatches.Captures[2].Value.Trim();
 
-                # Sets the Prompt which contains the Current git branch name
-                $GitPrompt = "($CurrentBranchName)" 			
-            }
-            Catch {
-                # Default prompt
-                $GitPrompt = "()"
-            }
-        } else {
-            # Default prompt
-            $GitPrompt = "()"
-        }
+        # Sets the Prompt which contains the Current git branch name
+        $GitPrompt = "($CurrentBranchName)" 			
+    }
+    else {
+        # Default prompt
+        $GitPrompt = ""
+    }
     }
     else {$GitPrompt = ""}
 
