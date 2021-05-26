@@ -1,3 +1,4 @@
+# You should put this file in the $profile.CurrentUserAllHosts path.
 
     function Prompt {
         
