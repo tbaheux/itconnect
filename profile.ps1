@@ -51,7 +51,7 @@
     }
     else {$GitPrompt = ""}
 
-    if ($IsWindows) {
+    if ($IsWindows -or $env:OS) {
         $IsAdmin = (New-Object Security.Principal.WindowsPrincipal `
         ([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 
