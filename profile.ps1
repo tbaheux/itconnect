@@ -81,9 +81,9 @@
             -NoNewLine `
             -ForegroundColor White `
             -BackgroundColor Black
-        Write-Host " >" `
+        Write-Host " >>>" `
             -NoNewLine `
-            -ForegroundColor White `
+            -ForegroundColor Yellow `
             -BackgroundColor Black
 
         $host.UI.RawUI.WindowTitle = "Current Dir: $((Get-Location).Path)"
